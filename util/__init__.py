@@ -9,7 +9,7 @@ class Span:
 
     def __init__(self, start, end):
         if not start <= end:
-            raise ValueError('Start cannot be greater than or equal to End')
+            raise ValueError( 'Start cannot be greater than or equal to End' )
 
         self._start = start
         self._end = end
@@ -23,7 +23,7 @@ class Span:
         return self._start, self._end
 
     def __eq__(self, other):
-        start, fin = other.span()
+        start, fin = other.span( )
         return self._start == start and self._end == fin
 
 
@@ -45,23 +45,18 @@ class DistanceCalculator:
         self._deletion_cost = deletion_cost
         self._subst_cost = subst_cost
 
-    def distance(self, source: object, target: object) -> object:
+    def distance(self, source, target):
 
         if source == "":
-            return len(target)
+            return len( target )
         if target == "":
-            return len(source)
+            return len( source )
         if source[-1] == target[-1]:
             cost = 0
         else:
             cost = 1
 
-        res = min([self.distance(source[:-1], target) + 1,
-                   self.distance(source, target[:-1]) + 1,
-                   self.distance(source[:-1], target[:-1]) + cost])
+        res = min( [self.distance( source[:-1], target ) + 1, self.distance( source, target[:-1] ) + 1,
+                    self.distance( source[:-1], target[:-1] ) + cost] )
 
         return res
-
-
-
-
