@@ -11,10 +11,18 @@ class TestEditDistance(unittest.TestCase):
         """
 
         ed = DistanceCalculator()
+
+
+        """
+        self.assertEqual(ed.distance('',''),0)
         self.assertEqual(ed.distance('', ''), 0)
         self.assertEqual(ed.distance('a', ''), 1)
         self.assertEqual(ed.distance('', 'a'), 1)
+       
+       
 
+        
+        
     def test_sameStrings(self):
         ed = DistanceCalculator()
 
@@ -33,7 +41,4 @@ class TestEditDistance(unittest.TestCase):
         self.assertEqual(ed.distance('book', 'books'), 2)
         self.assertEqual(ed.distance('book', 'back'), 8)
         self.assertEqual(ed.distance('books', 'book'), 2)
-
-
-
-
+        """

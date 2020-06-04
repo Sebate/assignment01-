@@ -1,8 +1,12 @@
+import tkinter as tk
+from math import *
+
 
 class Span:
     """
     Span objects are used to define boundaries within other iterables.
     """
+
     def __init__(self, start, end):
         if not start <= end:
             raise ValueError('Start cannot be greater than or equal to End')
@@ -29,7 +33,7 @@ class DistanceCalculator:
     one string to another.
     """
 
-    def __init__(self, insert_cost=1, deletion_cost=1, subst_cost=1):
+    def __init__(self, insert_cost: object = 1, deletion_cost: object = 1, subst_cost: object = 1) -> object:
         """
         The constructor for the distance calculator. The insert, deletion, and substitution cost can be specified
         as state for the object.
@@ -41,17 +45,23 @@ class DistanceCalculator:
         self._deletion_cost = deletion_cost
         self._subst_cost = subst_cost
 
-    def distance(self, source, target):
-        """
-        Calculates the distance between two strings.
-        :param source: The source string
-        :param target: The target string
-        :return: The scalar distance between the source and target.
+    def distance(self, source: object, target: object) -> object:
 
-        """
+        if source == "":
+            return len(target)
+        if target == "":
+            return len(source)
+        if source[-1] == target[-1]:
+            cost = 0
+        else:
+            cost = 1
+
+        res = min([self.distance(source[:-1], target) + 1,
+                   self.distance(source, target[:-1]) + 1,
+                   self.distance(source[:-1], target[:-1]) + cost])
+
+        return res
 
 
 
 
-
-        raise NotImplementedError('Distance calculation not implemented yet')
