@@ -44,6 +44,4 @@ class AEstimator:
                     counts[k] /= len(items)
             return counts
 
-DataScience = AEstimator()
-training_data = ['<s>', 'sam', 'i', 'am', 'i', 'am', 'sam']
-DataScience._contents(items)
+
