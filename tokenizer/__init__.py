@@ -1,4 +1,7 @@
+from __future__ import unicode_literals
+import tokenizer
 import re
+
 from util import Span
 
 
@@ -8,13 +11,13 @@ def _white_space_spans(text):
     :param text: The text to scan
     :return: A list of spans
     """
-    matches = re.finditer(r'\s+', text)
+    matches = re.finditer( r'\s+', text )
 
     offset = 0
     for m in matches:
-        yield offset, m.span(0)[0]
-        offset = m.span(0)[1]
-    yield offset, len(text)
+        yield offset, m.span( 0 )[0]
+        offset = m.span( 0 )[1]
+    yield offset, len( text )
 
 
 class Token:
@@ -42,7 +45,7 @@ class Token:
         return self._text[start:fin]
 
     def __eq__(self, other):
-        return self.__repr__() == other.__repr__()
+        return self.__repr__( ) == other.__repr__( )
 
 
 class ATokenizer:
@@ -59,16 +62,16 @@ class ATokenizer:
         :param text: The string to tokenize
         :return: A list of Token objects
         """
-        raise NotImplemented('Tokenizer not implemented.')
+        raise NotImplemented( 'Tokenizer not implemented.' )
 
 
-class WhiteSpaceTokenizer(ATokenizer):
+class WhiteSpaceTokenizer( ATokenizer ):
     """
     A simple white space tokenizer. Returns Token objects separated by white space.
     """
 
     def __init__(self):
-        super().__init__()
+        super( ).__init__( )
 
     def tokenize(self, text):
         """
@@ -76,10 +79,10 @@ class WhiteSpaceTokenizer(ATokenizer):
         :param text: The string of text to tokenize
         :return: The list of tokens separated by white space.
         """
-        return [Token(text, Span(s, e)) for s, e in _white_space_spans(text)]
+        return [Token( text, Span( s, e ) ) for s, e in _white_space_spans( text )]
 
 
-class Tokenizer(ATokenizer):
+class Tokenizer( ATokenizer ):
     """
     The default tokenizer.
     """
@@ -91,6 +94,4 @@ class Tokenizer(ATokenizer):
         return
 
     def tokenize(self, text):
-        raise NotImplementedError('Default tokenizer method not implemented')
-
-
+        return [Token( text, Span( s, e ) ) for s, e in _white_space_spans( text )]
