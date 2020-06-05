@@ -1,6 +1,8 @@
 """
 Any estimators will be provided here.
 """
+import items as items
+import laplace as laplace
 
 
 class AEstimator:
@@ -16,7 +18,7 @@ class AEstimator:
         classify unigrams, bigrams and n-grams.
         :return: Nothing
         """
-        raise NotImplemented('The train method is not yet implemented')
+        raise NotImplemented( 'The train method is not yet implemented' )
 
     def p(self, evidence, history=None):
         """
@@ -27,4 +29,21 @@ class AEstimator:
         """
         raise NotImplemented('The P method is not implemented yet.')
 
+    def _contents(items, laplace=False):
+        # count occurrences of values
+        print (items)
+        counts = {}
+        for item in items:
+            counts[item] = counts.get(item,0) + 1.0
+            # normalize
+            for k in counts:
+                if laplace:
+                    counts[k] += 1.0
+                    counts[k] /= (len(items) + len(counts))
+                else:
+                    counts[k] /= len(items)
+            return counts
 
+DataScience = AEstimator()
+training_data = ['<s>', 'sam', 'i', 'am', 'i', 'am', 'sam']
+DataScience._contents(items)
