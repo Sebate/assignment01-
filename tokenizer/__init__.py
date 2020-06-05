@@ -1,5 +1,4 @@
-from __future__ import unicode_literals
-import tokenizer
+
 import re
 
 from util import Span
